@@ -1,5 +1,13 @@
-export default function Header(){
-    return <header>
+'use client';
+import Link from 'next/link';
+import { Container } from './Header.styled';
 
-    </header>
+export default function Header() {
+  return (
+    <Container>
+      <Link href="/">Home</Link>
+      <Link href="/blog">BLOG</Link>
+      <Link href="/about">About</Link>
+    </Container>
+  );
 }
