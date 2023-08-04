@@ -1,28 +1,23 @@
-import { Metadata } from 'next';
-import Link from 'next/link';
+"use client";
+import Link from "next/link";
+import { getAllPosts } from "../services/getAllPosts";
+import { useEffect, useState } from "react";
 
-async function getData() {
-  const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
-    next: {
-      revalidate: 60, // кешування, на сервері буде запит раз в хвилину для всіх користувачів
-    },
-  });
+export default function Blog() {
+  const [posts, setPosts] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  return response.json();
-}
-
-export const metadata: Metadata = {
-  title: 'Blog | next-app',
-};
-
-export default async function Blog() {
-  const posts = await getData();
+  useEffect(() => {
+    getAllPosts()
+      .then(setPosts)
+      .finally(() => setLoading(false));
+  }, []);
 
   return (
     <>
       <h2>Blog</h2>
       <ul>
-        {posts.map((post: any) => (
+        {posts?.map((post: any) => (
           <li key={post.id}>
             <Link href={`/blog/${post.id}`}>{post.title}</Link>
           </li>

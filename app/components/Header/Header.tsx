@@ -1,13 +1,27 @@
-'use client';
-import Link from 'next/link';
-import { Container } from './Header.styled';
+"use client";
+
+import { Container } from "./Header.styled";
+import Navigation from "../Navigation/Navigation";
+
+const navigation = [
+  {
+    href: "/",
+    label: "Home",
+  },
+  {
+    href: "/blog",
+    label: "Blog",
+  },
+  {
+    href: "/about",
+    label: "About",
+  },
+];
 
 export default function Header() {
   return (
     <Container>
-      <Link href="/">Home</Link>
-      <Link href="/blog">BLOG</Link>
-      <Link href="/about">About</Link>
+      <Navigation navLinks={navigation} />
     </Container>
   );
 }
